@@ -7,9 +7,13 @@ namespace Aqueduct.Sitecore.DynamicPlaceholders
 {
     internal static class RenderingExtensions
     {
-        public static IEnumerable<string> GetParentRenderingIdsForRendering(this RenderingReference rendering)
+        internal static IEnumerable<string> GetParentRenderingIdsForRendering(this RenderingReference rendering)
         {
-            var placeholderKey = rendering.Placeholder;
+            return GetParentRenderingIdsForRendering(rendering.Placeholder);            
+        }
+
+        internal static IEnumerable<string> GetParentRenderingIdsForRendering(string placeholderKey)
+        {
             if (!PlaceholderKeyHelper.IsDynamicPlaceholder(placeholderKey)) return Enumerable.Empty<string>();
 
             return placeholderKey.Split(new[] { '/' }, StringSplitOptions.None)
